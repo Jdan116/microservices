@@ -1,5 +1,9 @@
+server:
+  port: 8080
 
 spring:
+  application:
+    name: HR
   datasource:
     url: jdbc:h2:mem:mydb
     username: root
@@ -18,3 +22,12 @@ spring:
     password: admin
     packages:
       trust-all: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      hostname: localhost
