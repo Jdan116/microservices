@@ -11,10 +11,34 @@ spring:
           uri: lb://USER
           predicates:
             - Path=/users/**,/employees/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: USER
+                fallbackuri: forward:/userFallBack
         - id: DEPARTEMENT
           uri: lb://DEPARTEMENT
           predicates:
             - Path=/hr/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: DEPARTEMENT
+                fallbackuri: forward:/departmentFallBack
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, health, info
 
 eureka:
   client:

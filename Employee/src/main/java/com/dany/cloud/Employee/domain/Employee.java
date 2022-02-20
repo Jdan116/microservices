@@ -19,5 +19,6 @@ public class Employee {
     private String firstName;
     private String LastName;
     private int age;
+    private long departmentId;
 
 }

@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class FallBackMethodController {
 
     @GetMapping("/userFallBack")
-    public String userServiceFallBack() {
+    public String userFallBack() {
         return "User Service is taking longer then Excepted. Please try again later.";
     }
 
     @GetMapping("/departmentFallBack")
-    public String departmentServiceFallBack() {
+    public String departmentFallBack() {
         return "Department Service is taking longer then Excepted. Please try again later.";
     }
 }
