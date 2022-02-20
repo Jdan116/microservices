@@ -6,10 +6,14 @@ import com.dany.cloud.Employee.domain.User;
 import com.dany.cloud.Employee.repository.EmployeeRepository;
 import com.dany.cloud.Employee.service.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -19,6 +23,9 @@ public class UserService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     public ResponseEntity<User> getUserInfo(Long id) {
 
@@ -31,7 +38,6 @@ public class UserService {
     }
 
     private Department getEmployeeDepartment(Long id) {
-        Department department = restTemplate.getForObject(Constants.SERVER_URL + "/" + id, Department.class, " from Spring");
-        return department;
+        return restTemplate.getForObject(Constants.HR_URL + "/" + id, Department.class);
     }
 }
